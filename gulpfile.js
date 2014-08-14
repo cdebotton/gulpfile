@@ -21,7 +21,9 @@ gulp.task('serve:production', task.serve.production);
 gulp.task ('mocha', task.mocha.run);
 gulp.task('mocha:watch', task.mocha.watch);
 
+gulp.task('open', task.open);
+
 gulp.task('default', ['assets', 'stylus', 'browserify']);
+gulp.task('watch', ['mocha:watch', 'assets:watch', 'stylus:watch', 'browserify:watch', 'serve:development', 'open']);
 gulp.task('build', ['assets:build', 'stylus:build', 'browserify:build']);
 gulp.task('deploy', ['build', 'serve:production']);
-gulp.task('watch', ['mocha:watch', 'assets:watch', 'stylus:watch', 'browserify:watch', 'serve:development']);
