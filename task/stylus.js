@@ -7,13 +7,14 @@ var gutil       = require('gulp-util');
 var rename      = require('gulp-rename');
 var minifyCss   = require('gulp-minify-css');
 var nib         = require('nib');
+var normalize   = require('stylus-normalize');
 var express     = require('gulp-express');
 
 function StylusCompiler(watch, minify) {
   function run() {
     return gulp.src('./src/styles/index.styl')
       .pipe(stylus({
-        use: [nib()]
+        use: [nib(), normalize()]
       }))
       .pipe(plumber())
       .pipe(rename(minify ? 'app.min.css' : 'app.css'))

@@ -33,7 +33,7 @@ function AssetPipeline(watch, build) {
              'Finished',
              gutil.colors.green('browserify:watch#rebundle()'),
              'after',
-             gutil.colors.red(time +  ' ms')
+             gutil.colors.magenta(time +  ' ms')
            );
          });
 
