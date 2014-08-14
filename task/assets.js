@@ -2,11 +2,21 @@
 
 var gulp        = require('gulp');
 var minifyHtml  = require('gulp-minify-html');
+var htmlReplace = require('gulp-html-replace');
+var filter      = require('gulp-filter');
 var gutil       = require('gulp-util');
 
 function AssetPipeline(watch, compile) {
   function moveFiles() {
-    gulp.src('./src/assets/**/*')
+    gulp.src('./src/assets/index.html')
+      .pipe(htmlReplace({
+        js: !compile ? '/bundle.js' : '/bundle.min.js',
+        css: !compile ? '/stylesheets/app.css' : '/stylesheets/app.min.css',
+        livereload: !compile ? 'http://127.0.0.1:35729/livereload.js?snipver=1' : ''
+      }))
+      .pipe(gulp.dest('./build/'));
+
+    gulp.src(['./src/assets/**/*', '!./src/assets/index.html'])
       .pipe(compile ? minifyHtml() : gutil.noop())
       .pipe(gulp.dest('./build/'));
   }
