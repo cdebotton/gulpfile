@@ -19,7 +19,7 @@ function TestRunner(watch) {
     gulp.src([
       './test/unit/**/*.coffee',
       './test/integration/**/*.coffee'
-    ])
+    ], {read: false})
       .pipe(mocha())
       .on('error', function(err) { console.log(err); });
   }
