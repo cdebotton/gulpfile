@@ -8,7 +8,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div className="App">
-        <h1>Hello, world!</h1>
+        <h1><i className="fa fa-home" /> Hello, world!</h1>
       </div>
     );
   }

@@ -47,9 +47,12 @@
     "serve-static": "~1.5.1",
     "sinon": "~1.10.3",
     "sinon-chai": "~2.5.0",
-    "stylus-normalize": "~3.0.0",
     "tiny-lr": "~0.1.0",
     "vinyl-source-stream": "~0.1.1",
-    "watchify": "~1.0.2"
+    "watchify": "~1.0.2",
+    "es6-promise": "~1.0.0",
+    "streamqueue": "~0.1.1",
+    "normalize.css": "~3.0.1",
+    "gulp-concat": "~2.3.4"
   }
 }

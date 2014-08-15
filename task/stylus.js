@@ -4,22 +4,39 @@ var gulp        = require('gulp');
 var stylus      = require('gulp-stylus');
 var plumber     = require('gulp-plumber');
 var gutil       = require('gulp-util');
+var concat      = require('gulp-concat');
 var rename      = require('gulp-rename');
 var minifyCss   = require('gulp-minify-css');
-var nib         = require('nib');
-var normalize   = require('stylus-normalize');
 var express     = require('gulp-express');
+var nib         = require('nib');
+var streamqueue = require('streamqueue');
+
+var PATHS = {
+  NORMALIZE   : './node_modules/normalize.css/normalize.css',
+  FONTAWESOME : './node_modules/font-awesome/css/font-awesome.css',
+  SRC         : './src/styles/index.styl',
+  BUILD       : './build/stylesheets/'
+};
 
 function StylusCompiler(watch, minify) {
   function run() {
-    return gulp.src('./src/styles/index.styl')
+    var stream = streamqueue({objectMode: true});
+
+    stream.queue(gulp.src(PATHS.NORMALIZE));
+
+    stream.queue(gulp.src(PATHS.FONTAWESOME));
+
+    stream.queue(gulp.src(PATHS.SRC)
       .pipe(stylus({
-        use: [nib(), normalize()]
+        use: [nib()]
       }))
-      .pipe(plumber())
-      .pipe(rename(minify ? 'app.min.css' : 'app.css'))
+      .pipe(plumber()));
+
+    return stream.done()
+      .pipe(concat('app.css'))
+      .pipe(rename({ suffix: minify ? '.min' : '' }))
       .pipe(minify ? minifyCss() : gutil.noop())
-      .pipe(gulp.dest('./build/stylesheets/'));
+      .pipe(gulp.dest(PATHS.BUILD));
   }
 
   if (watch) {

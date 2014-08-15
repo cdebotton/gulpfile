@@ -21,7 +21,7 @@ function TestRunner(watch) {
       './test/integration/**/*.coffee'
     ], {read: false})
       .pipe(mocha())
-      .on('error', function(err) { console.log(err); });
+      .on('error', function(err) { console.log(err.toString()); });
   }
 
   return run();
