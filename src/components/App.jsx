@@ -11,6 +11,7 @@ var App = React.createClass({
       <div className="App">
         <h1><Link to="/"><i className="fa fa-home" /></Link> Hello, world!</h1>
         <nav>
+          <Link to="/">Home</Link>
           <Link to="about">About</Link>
         </nav>
         {this.props.activeRouteHandler()}
