@@ -4,7 +4,7 @@ var gulp        = require('gulp');
 var minifyHtml  = require('gulp-minify-html');
 var htmlReplace = require('gulp-html-replace');
 var filter      = require('gulp-filter');
-var gutil       = require('gulp-util');
+var gulpif      = require('gulp-if');
 
 function AssetPipeline(watch, compile) {
   function moveFiles() {
@@ -14,7 +14,7 @@ function AssetPipeline(watch, compile) {
         css: !compile ? '/stylesheets/app.css' : '/stylesheets/app.min.css',
         livereload: !compile ? 'http://127.0.0.1:35729/livereload.js?snipver=1' : ''
       }))
-      .pipe(compile ? minifyHtml() : gutil.noop())
+      .pipe(gulpif(compile, minifyHtml()))
       .pipe(gulp.dest('./build/'));
 
     gulp.src(['./src/assets/**/*', '!./src/assets/index.html'])

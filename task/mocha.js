@@ -2,6 +2,7 @@
 
 var gulp    = require('gulp');
 var mocha   = require('gulp-mocha');
+var gutil   = require('gulp-util');
 var coffee  = require('coffee-script');
 
 require('coffee-script/register');
@@ -21,7 +22,7 @@ function TestRunner(watch) {
       './test/integration/**/*.coffee'
     ], {read: false})
       .pipe(mocha())
-      .on('error', function(err) { console.log(err.toString()); });
+      .on('error', function(err) { gutil.log(err.toString()); });
   }
 
   return run();

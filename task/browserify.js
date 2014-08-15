@@ -2,6 +2,7 @@
 
 var gulp        = require('gulp');
 var gutil       = require('gulp-util');
+var gulpif      = require('gulp-if');
 var streamify   = require('gulp-streamify');
 var uglify      = require('gulp-uglify');
 var rename      = require('gulp-rename');
@@ -41,8 +42,8 @@ function AssetPipeline(watch, build) {
     return bundler.bundle()
       .on('error', function(err) { console.log(err.toString()); })
       .pipe(source('bundle.js'))
-      .pipe(build ? rename({suffix: '.min'}) : gutil.noop())
-      .pipe(build ? streamify(uglify()) : gutil.noop())
+      .pipe(gulpif(build, rename({suffix: '.min'})))
+      .pipe(gulpif(build, streamify(uglify())))
       .pipe(gulp.dest('./build/'));
   }
 

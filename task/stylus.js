@@ -3,7 +3,7 @@
 var gulp        = require('gulp');
 var stylus      = require('gulp-stylus');
 var plumber     = require('gulp-plumber');
-var gutil       = require('gulp-util');
+var gulpif      = require('gulp-if');
 var concat      = require('gulp-concat');
 var rename      = require('gulp-rename');
 var minifyCss   = require('gulp-minify-css');
@@ -35,7 +35,7 @@ function StylusCompiler(watch, minify) {
     return stream.done()
       .pipe(concat('app.css'))
       .pipe(rename({ suffix: minify ? '.min' : '' }))
-      .pipe(minify ? minifyCss() : gutil.noop())
+      .pipe(gulpif(minify, minifyCss()))
       .pipe(gulp.dest(PATHS.BUILD));
   }
 
