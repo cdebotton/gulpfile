@@ -14,10 +14,10 @@ function AssetPipeline(watch, compile) {
         css: !compile ? '/stylesheets/app.css' : '/stylesheets/app.min.css',
         livereload: !compile ? 'http://127.0.0.1:35729/livereload.js?snipver=1' : ''
       }))
+      .pipe(compile ? minifyHtml() : gutil.noop())
       .pipe(gulp.dest('./build/'));
 
     gulp.src(['./src/assets/**/*', '!./src/assets/index.html'])
-      .pipe(compile ? minifyHtml() : gutil.noop())
       .pipe(gulp.dest('./build/'));
   }
   if (watch) {
