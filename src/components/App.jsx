@@ -3,12 +3,17 @@
 'use strict';
 
 var React = require('react');
+var Link  = require('react-router').Link;
 
 var App = React.createClass({
   render: function() {
     return (
       <div className="App">
-        <h1><i className="fa fa-home" /> Hello, world!</h1>
+        <h1><Link to="/"><i className="fa fa-home" /></Link> Hello, world!</h1>
+        <nav>
+          <Link to="about">About</Link>
+        </nav>
+        {this.props.activeRouteHandler()}
       </div>
     );
   }

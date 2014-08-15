@@ -1,10 +1,10 @@
 'use strict';
 
 var React = require('react');
-var App = require('./components/App.jsx');
+var Routes = require('./components/Routes.jsx');
 
 if ('undefined' !== typeof window) {
-  React.renderComponent(App(), document.body);
+  React.renderComponent(Routes, document.body);
 }
 
-module.exports = App;
+module.exports = Routes;

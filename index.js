@@ -13,6 +13,9 @@ app.use(compression())
    .use(bodyParser.urlencoded({extended: true}))
    .use(bodyParser.json())
    .use(connectLr)
+   .use(function(req, res, next) {
+     res.sendFile(require.resolve('./build/index.html'));
+   })
    .listen(3000, function(err) {
      if (err) throw err;
      console.log('Listening on port 3000!');
