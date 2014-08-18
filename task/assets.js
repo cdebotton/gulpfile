@@ -2,9 +2,12 @@
 
 var gulp        = require('gulp');
 var minifyHtml  = require('gulp-minify-html');
+var imagemin    = require('gulp-imagemin');
 var htmlReplace = require('gulp-html-replace');
 var filter      = require('gulp-filter');
 var gulpif      = require('gulp-if');
+var express     = require('gulp-express');
+var pngcrush    = require('imagemin-pngcrush');
 
 function AssetPipeline(watch, compile) {
   function moveFiles() {
@@ -22,6 +25,9 @@ function AssetPipeline(watch, compile) {
   }
   if (watch) {
     gulp.watch('./src/assets/**/*', moveFiles);
+    gulp.watch('./build/index.html', express.notify);
+    gulp.watch('./build/fonts/**/*', express.notify);
+    gulp.watch('./build/img/**/*', express.notify);
   }
   return moveFiles();
 }
