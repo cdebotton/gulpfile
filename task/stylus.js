@@ -7,6 +7,7 @@ var gulpif      = require('gulp-if');
 var concat      = require('gulp-concat');
 var rename      = require('gulp-rename');
 var minifyCss   = require('gulp-minify-css');
+var sourcemaps  = require('gulp-sourcemaps');
 var express     = require('gulp-express');
 var nib         = require('nib');
 var streamqueue = require('streamqueue');
@@ -22,13 +23,16 @@ function StylusCompiler(watch, minify) {
   function run() {
     var stream = streamqueue({objectMode: true});
 
+    stream.pipe(gulpif(!minify, sourcemaps.init()));
+
     stream.queue(gulp.src(PATHS.NORMALIZE));
 
     stream.queue(gulp.src(PATHS.FONTAWESOME));
 
     stream.queue(gulp.src(PATHS.SRC)
       .pipe(stylus({
-        use: [nib()]
+        use: [nib()],
+        debug: true
       }))
       .pipe(plumber()));
 
@@ -36,6 +40,7 @@ function StylusCompiler(watch, minify) {
       .pipe(concat('app.css'))
       .pipe(rename({ suffix: minify ? '.min' : '' }))
       .pipe(gulpif(minify, minifyCss()))
+      .pipe(gulpif(!minify, sourcemaps.write()))
       .pipe(gulp.dest(PATHS.BUILD));
   }
 

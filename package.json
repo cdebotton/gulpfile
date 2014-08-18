@@ -55,6 +55,7 @@
     "normalize.css": "~3.0.1",
     "gulp-concat": "~2.3.4",
     "react-router": "~0.5.2",
-    "gulp-if": "~1.2.4"
+    "gulp-if": "~1.2.4",
+    "gulp-sourcemaps": "~1.1.1"
   }
 }
