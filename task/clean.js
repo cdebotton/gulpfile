@@ -4,7 +4,7 @@ var gulp  = require('gulp');
 var clean = require('gulp-clean');
 
 function Clean() {
-  gulp.src('./build/*', {read: false})
+  gulp.src('./build/', {read: false})
     .pipe(clean());
 }
 
