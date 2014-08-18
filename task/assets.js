@@ -20,6 +20,14 @@ function AssetPipeline(watch, compile) {
       .pipe(gulpif(compile, minifyHtml()))
       .pipe(gulp.dest('./build/'));
 
+    gulp.src('./src/assets/img/**/*')
+      .pipe(imagemin({
+        progressive: true,
+        svgoPlugins: [{removeViewBox: false}],
+        use: [pngcrush()]
+      }))
+      .pipe(gulp.dest('./build/img'));
+
     gulp.src(['./src/assets/**/*', '!./src/assets/index.html'])
       .pipe(gulp.dest('./build/'));
   }
