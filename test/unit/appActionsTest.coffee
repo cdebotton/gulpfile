@@ -8,3 +8,5 @@ chai.use sinonChai
 AppActions   = require '../../src/actions/AppActions'
 
 describe 'AppActions', ->
+  describe '#login()', ->
+

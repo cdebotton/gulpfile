@@ -6,5 +6,6 @@ module.exports = {
   serve     : require('./serve'),
   stylus    : require('./stylus'),
   mocha     : require('./mocha'),
-  open      : require('./open')
+  open      : require('./open'),
+  clean     : require('./clean')
 };

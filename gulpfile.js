@@ -22,6 +22,7 @@ gulp.task ('mocha', task.mocha.run);
 gulp.task('mocha:watch', task.mocha.watch);
 
 gulp.task('open', task.open);
+gulp.task('clean', task.clean);
 
 gulp.task('default', ['assets', 'stylus', 'browserify']);
 gulp.task('watch', ['mocha:watch', 'assets:watch', 'stylus:watch', 'browserify:watch', 'serve:development', 'open']);
