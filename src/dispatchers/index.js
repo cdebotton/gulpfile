@@ -103,9 +103,7 @@ Dispatcher.prototype = merge(Dispatcher.prototype, {
  */
 Dispatcher.injectTestHelpers = function() {
   Dispatcher.__helpers = {
-    _callbacks: function() { return _callbacks; },
-    _promises: function() { return _promises; },
-    _flush: function() { _callbacks = [] }
+    callbacks: function() { return _callbacks; }
   };
 };
 

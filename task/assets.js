@@ -4,7 +4,6 @@ var gulp        = require('gulp');
 var minifyHtml  = require('gulp-minify-html');
 var imagemin    = require('gulp-imagemin');
 var htmlReplace = require('gulp-html-replace');
-var filter      = require('gulp-filter');
 var gulpif      = require('gulp-if');
 var express     = require('gulp-express');
 var pngcrush    = require('imagemin-pngcrush');

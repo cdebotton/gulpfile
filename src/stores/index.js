@@ -7,7 +7,7 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 
 var CHANGE_EVENT = 'change';
 
-var AppStore = merge(EventEmitter.prototype, {
+var Store = merge(EventEmitter.prototype, {
   addChangeListener: function(callback) {
     invariant(
       'function' === typeof callback,
@@ -33,4 +33,4 @@ var AppStore = merge(EventEmitter.prototype, {
   }
 });
 
-module.exports = AppStore;
+module.exports = Store;

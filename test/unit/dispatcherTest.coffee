@@ -8,9 +8,12 @@ chai.use sinonChai
 Dispatcher = require '../../src/dispatchers'
 Dispatcher.injectTestHelpers()
 
-describe 'Dispatcher', ->
-  beforeEach -> Dispatcher.__helpers._flush()
+TEST_ACTION =
+  source: 'TEST_ACTION'
+  action:
+    actionType: 'TEST'
 
+describe 'Dispatcher', ->
   describe '#register()', ->
     it 'should require a callback parameter', ->
       Dispatcher::register.should.throw 'Invariant Violation'
@@ -19,13 +22,13 @@ describe 'Dispatcher', ->
       [1..15].forEach ->
         noop = ->
         Dispatcher::register noop
-        Dispatcher.__helpers._callbacks().indexOf(noop).should.be.greaterThan -1
+        Dispatcher.__helpers.callbacks().indexOf(noop).should.be.greaterThan -1
 
     it 'should return a #dispatcherIndex equal to the length of callbacks', ->
       [1..15].forEach ->
         noop = ->
         indexA = Dispatcher::register noop
-        indexA.should.equal Dispatcher.__helpers._callbacks().length
+        indexA.should.equal Dispatcher.__helpers.callbacks().length
 
   describe '#dispatch()', ->
     it 'should require a payload object', ->
@@ -37,7 +40,7 @@ describe 'Dispatcher', ->
         index     = Dispatcher::register callback
         {index, callback}
 
-      Dispatcher::dispatch {}
+      Dispatcher::dispatch TEST_ACTION
       spies.forEach (spy) -> spy.callback.should.have.been.calledOnce
 
   describe '#waitFor()', (done) ->
@@ -55,7 +58,7 @@ describe 'Dispatcher', ->
         spy.should.have.been.calledOnce
         done()
 
-      Dispatcher::dispatch {}
+      Dispatcher::dispatch TEST_ACTION
 
     it 'should wait for callbacks of promiseIndexes to run before executing callback', ->
       spies = [1..15].map ->
@@ -69,4 +72,4 @@ describe 'Dispatcher', ->
         spies.forEach (spy) -> spy.callback.should.have.been.calledOnce
         done()
 
-      Dispatcher::dispatch {}
+      Dispatcher::dispatch TEST_ACTION
